@@ -1,0 +1,11 @@
+﻿@model IEnumerable<PizzaPalace.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">Orders</h1>
+
+<div id="view-all">
+    @await Html.PartialAsync("_ViewAll", Model)
+</div>

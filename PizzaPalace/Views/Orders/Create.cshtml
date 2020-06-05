@@ -1,0 +1,45 @@
+﻿@model PizzaPalace.ViewModels.OrderViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Save" asp-route-id="@Model.Order.OrderId" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Order.OrderId" />
+            <input type="hidden" asp-for="Order.Subtotal" />
+            <input type="hidden" asp-for="Order.Tax" />
+            <input type="hidden" asp-for="Order.TotalPrice" />
+            <input type="hidden" asp-for="Order.PizzaQuantity" />
+            <input type="hidden" asp-for="Order.NumberOfToppings" />
+            <div class="form-row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Order.PizzaSize" class="control-label"></label>
+                        <select asp-for="Order.PizzaSizeList" class="form-control multiple" asp-items="@(new SelectList(Model.Sizes, "Name", "Display"))" multiple="multiple"></select>
+                        <span asp-validation-for="Order.PizzaSize" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Order.Toppings" class="control-label"></label>
+                        <select asp-for="Order.ToppingsList" class="form-control multiple" asp-items="@(new SelectList(Model.Toppings, "Name", "Display"))" multiple="multiple"></select>
+                        <span asp-validation-for="Order.Toppings" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Order" class="btn btn-primary btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

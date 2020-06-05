@@ -1,0 +1,21 @@
+﻿@using System.Text.RegularExpressions
+@model PizzaPalace.Models.Order
+
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model.PizzaSizeList)
+{
+     <span>1 @item, @Model.NumberOfToppings Topping Pizza - @Regex.Replace(Model.Toppings.Replace(",", " and "), @"[^0-9a-zA-Z]+", " ") </span><br />
+}
+<br />
+@Html.DisplayNameFor(model => model.Subtotal): @Html.DisplayFor(model => model.Subtotal)<br />
+@Html.DisplayNameFor(model => model.Tax): @Html.DisplayFor(model => model.Tax)<br />
+@Html.DisplayNameFor(model => model.TotalPrice): @Html.DisplayFor(model => model.TotalPrice)<br />
+
+
+<br />
+<div>
+    <a asp-action="Index" class="btn btn-secondary btn-block">All Orders</a>
+</div>
